@@ -12,6 +12,8 @@ function About() {
       <p>
         I am {month < 0 || (month >= 0 && day > 0) ? year - 1 : year} years old
       </p>
+      <p>I look like this:</p>
+      <img src="johan.jpg" height="300" width="250" alt={"me"} />
     </div>
   );
 }

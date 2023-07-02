@@ -1,7 +1,7 @@
 import "./style.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root, { loader } from "./routes/root.js";
+import Root from "./routes/root.js";
 import ErrorPage from "./error-page.js";
 import Jokes from "./routes/jokes.js";
 import About from "./routes/about";
