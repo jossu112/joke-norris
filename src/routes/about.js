@@ -12,8 +12,12 @@ function About() {
       <p>
         I am {month < 0 || (month >= 0 && day > 0) ? year - 1 : year} years old
       </p>
+      <p>
+        When I grow up, i want to be a front end developer for Ektaco AS for
+        either the CC5 backoffice or POS
+      </p>
       <p>I look like this:</p>
-      <img src="johan.jpg" height="300" width="250" alt={"me"} />
+      <img className="profile-picture" src="johan.jpg" alt={"me"} />
     </div>
   );
 }

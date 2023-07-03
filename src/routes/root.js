@@ -1,6 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 
-export default function Root() {
+function Root() {
   const date = new Date();
 
   return (
@@ -27,3 +27,4 @@ export default function Root() {
     </>
   );
 }
+export default Root;
