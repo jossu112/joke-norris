@@ -7,56 +7,29 @@ import EditJokeModal from "./editJokeModal";
 import Paginate from "./pagination";
 
 // Render saved jokes
-function JokeListItem({ categoryOutputFilter }) {
+function JokeListItem({
+  categoryOutputFilter,
+  indexOfFirstPost,
+  indexOfLastPost,
+  setCategoryOutputFilter,
+  factCount,
+}) {
   const [editJokeId, setEditJokeId] = useState("");
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const jokesObjectRedux = JokesObjectRedux();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(3);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  const paginate = (pageNumber, el) => {
-    setCurrentPage(pageNumber);
-    const pages = document.querySelectorAll(".active");
-    pages.forEach((page) => page.classList.remove("active"));
-
-    const page = document.querySelector(`${el}`);
-    page.classList.add("active");
-  };
-
   if (jokesObjectRedux.length === 0) return;
 
-  let factCount = 0;
-  function getJokesOnPage() {
-    factCount = jokesObjectRedux
-      .map((joke) => (joke.saved ? { ...joke } : null))
-      .filter((result) => result !== null)
-      .filter((result) =>
-        categoryOutputFilter === ""
-          ? result
-          : result.category === categoryOutputFilter
-      ).length;
-  }
-  getJokesOnPage();
+  function deleteJoke(jokeId, joke) {
+    dispatch({
+      type: "jokes/saveAndDelete",
+      idPayload: jokeId,
+      textPayload: joke,
+      deletedPayload: true,
+    });
 
-  const previousPage = () => {
-    if (currentPage !== 1) {
-      paginate(currentPage - 1, `.page-number-${currentPage - 1}`);
-    }
-  };
-
-  const nextPage = () => {
-    if (currentPage !== Math.ceil(factCount / postsPerPage)) {
-      paginate(currentPage + 1, `.page-number-${currentPage + 1}`);
-    }
-  };
-
-  function deleteJoke(jokeId) {
-    dispatch({ type: "jokes/saveAndDelete", idPayload: jokeId });
+    if (factCount <= 1) setCategoryOutputFilter("all");
   }
 
   return (
@@ -66,7 +39,7 @@ function JokeListItem({ categoryOutputFilter }) {
           .map((joke) => (joke.saved ? { ...joke } : null))
           .filter((result) => result !== null)
           .filter((result) =>
-            categoryOutputFilter === ""
+            categoryOutputFilter === "all"
               ? result
               : result.category === categoryOutputFilter
           )
@@ -82,7 +55,12 @@ function JokeListItem({ categoryOutputFilter }) {
                 <p className="joke-description">{joke.text}</p>
               </div>
               <div className="actions">
-                <button className="btn" onClick={() => deleteJoke(joke.id)}>
+                <button
+                  className="btn"
+                  onClick={() => {
+                    deleteJoke(joke.id, joke.text);
+                  }}
+                >
                   DELETE
                 </button>
                 <button
@@ -110,16 +88,6 @@ function JokeListItem({ categoryOutputFilter }) {
           </div>
         ) : null}
       </ul>
-
-      <Paginate
-        postsPerPage={postsPerPage}
-        totalPosts={factCount}
-        paginate={paginate}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        indexOfLastPost={indexOfLastPost}
-        indexOfFirstPost={indexOfFirstPost}
-      />
     </>
   );
 }

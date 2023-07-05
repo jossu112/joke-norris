@@ -8,11 +8,17 @@ function Paginate({
   nextPage,
   indexOfLastPost,
   indexOfFirstPost,
+  currentPage,
 }) {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
+  }
+  if (pageNumbers.length > 0) {
+    if (!pageNumbers.find((num) => num === currentPage)) {
+      paginate(currentPage - 1, `.page-number-${currentPage - 1}`);
+    }
   }
 
   return (
@@ -29,7 +35,9 @@ function Paginate({
             <li
               number={number}
               key={number}
-              className={`page-number page-number-${number}`}
+              className={`page-number page-number-${number} ${
+                number === 1 ? "active" : ""
+              }`}
               onClick={() => {
                 paginate(number, `.page-number-${number}`);
               }}

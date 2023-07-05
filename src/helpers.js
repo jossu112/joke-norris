@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import jokesReducer from "./features/jokesReducer";
 
 export const getJSON = async function (url) {
   try {
@@ -13,5 +14,7 @@ export const getJSON = async function (url) {
 };
 
 export const JokesObjectRedux = () => {
-  return useSelector((state) => state.jokes.map((joke) => joke));
+  const jokes = useSelector((state) => state.jokes.map((joke) => joke));
+  // console.log(jokesReducer.map((state) => console.log(state)));
+  return jokes;
 };

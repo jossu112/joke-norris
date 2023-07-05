@@ -2,9 +2,12 @@ import "../style.css";
 import { useState } from "react";
 import FilterContent from "./filterContent";
 
-function CategoryOutputFilter({
+function OutputFilter({
   categoryOutputFilter,
   setCategoryOutputFilter,
+  showDeleted,
+  setShowDeleted,
+  setCategoryFilter,
 }) {
   const [showFilter, setShowFilter] = useState(false);
 
@@ -22,10 +25,13 @@ function CategoryOutputFilter({
         <FilterContent
           setCategoryOutputFilter={setCategoryOutputFilter}
           categoryOutputFilter={categoryOutputFilter}
+          showDeleted={showDeleted}
+          setShowDeleted={setShowDeleted}
+          setCategoryFilter={setCategoryFilter}
         />
       ) : null}
     </div>
   );
 }
 
-export default CategoryOutputFilter;
+export default OutputFilter;

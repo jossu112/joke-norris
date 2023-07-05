@@ -18,6 +18,7 @@ export default function jokesReducer(state = initialState, action) {
           fetchTime: fetchTime(),
           saved: false,
           edited: false,
+          deleted: false,
         },
       ];
     }
@@ -31,6 +32,7 @@ export default function jokesReducer(state = initialState, action) {
           ...joke,
           text: action.textPayload,
           saved: !joke.saved,
+          deleted: action.deletedPayload,
         };
       });
     }
@@ -52,3 +54,12 @@ export default function jokesReducer(state = initialState, action) {
       return state;
   }
 }
+
+// export function jokesGetter(state = initialState) {
+//   if (state.length > 0) {
+//     const reducer = jokesReducer();
+//     const output = reducer.map((state) => state.jokes.map((joke) => joke));
+//     console.log(output);
+//   }
+// }
+// jokesGetter();

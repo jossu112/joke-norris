@@ -62,7 +62,12 @@ function RenderJoke({ categoryFilter, setCategoryFilter }) {
   }, [categoryFilter]);
 
   const saveJoke = (id, joke) => {
-    dispatch({ type: "jokes/saveAndDelete", idPayload: id, textPayload: joke });
+    dispatch({
+      type: "jokes/saveAndDelete",
+      idPayload: id,
+      textPayload: joke,
+      deletedPayload: false,
+    });
   };
 
   return (
