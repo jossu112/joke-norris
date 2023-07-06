@@ -1,10 +1,12 @@
 import "../style.css";
+import { getDate } from "../helpers";
 
 function About() {
-  const date = new Date();
+  const date = getDate();
   const year = date.getFullYear() - 1996;
   const month = date.getMonth() - 10;
   const day = date.getDate() - 5;
+
   return (
     <div className="about-content">
       <h1>A little bit about me:</h1>

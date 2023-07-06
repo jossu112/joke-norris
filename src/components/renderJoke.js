@@ -5,13 +5,10 @@ import { API_URL } from "../conf.js";
 import { getJSON } from "../helpers";
 
 import { useDispatch } from "react-redux";
-import { JokesObjectRedux } from "../helpers";
 
 // Render new joke
-function RenderJoke({ categoryFilter, setCategoryFilter }) {
+function RenderJoke({ categoryFilter, setCategoryFilter, jokesObjectRedux }) {
   let saveButton = "SAVE";
-
-  const jokesObjectRedux = JokesObjectRedux();
 
   const initText =
     "Nothing to show yet, start rendering jokes by choosing the category";

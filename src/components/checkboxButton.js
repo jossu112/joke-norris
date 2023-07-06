@@ -5,13 +5,14 @@ function CheckboxButton({
   setShowDeleted,
   setCategoryOutputFilter,
   setPlaceholder,
+  paginate,
 }) {
-  // const [showDeleted, setShowDeleted] = useState(false);
-
   const onOptionChange = () => {
     setShowDeleted(!showDeleted);
     setCategoryOutputFilter("all");
     setPlaceholder("all");
+
+    paginate(1, ".page-number-1");
   };
 
   return (

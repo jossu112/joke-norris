@@ -2,9 +2,7 @@ import "../style.css";
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { JokesObjectRedux } from "../helpers";
 import EditJokeModal from "./editJokeModal";
-import Paginate from "./pagination";
 
 // Render saved jokes
 function JokeListItem({
@@ -13,11 +11,11 @@ function JokeListItem({
   indexOfLastPost,
   setCategoryOutputFilter,
   factCount,
+  jokesObjectRedux,
 }) {
   const [editJokeId, setEditJokeId] = useState("");
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const jokesObjectRedux = JokesObjectRedux();
 
   if (jokesObjectRedux.length === 0) return;
 
@@ -82,6 +80,7 @@ function JokeListItem({
         {showModal ? (
           <div className="modal-window">
             <EditJokeModal
+              jokesObjectRedux={jokesObjectRedux}
               setShowModal={setShowModal}
               editJokeId={editJokeId}
             />

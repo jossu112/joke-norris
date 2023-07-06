@@ -2,11 +2,9 @@ import "../style.css";
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { JokesObjectRedux } from "../helpers";
 
-function EditJokeModal({ setShowModal, editJokeId }) {
+function EditJokeModal({ setShowModal, editJokeId, jokesObjectRedux }) {
   const dispatch = useDispatch();
-  const jokesObjectRedux = JokesObjectRedux();
 
   const editableJoke = jokesObjectRedux
     .filter((joke) => joke.id === editJokeId)

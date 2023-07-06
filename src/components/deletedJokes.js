@@ -1,5 +1,5 @@
 import React from "react";
-import { JokesObjectRedux } from "../helpers";
+
 import { useDispatch } from "react-redux";
 
 function DeletedJokes({
@@ -8,8 +8,8 @@ function DeletedJokes({
   indexOfLastPost,
   factCount,
   setCategoryOutputFilter,
+  jokesObjectRedux,
 }) {
-  const jokesObjectRedux = JokesObjectRedux();
   const dispatch = useDispatch();
 
   function reactivateJoke(jokeId, joke) {
@@ -58,17 +58,6 @@ function DeletedJokes({
             </li>
           ))}
       </ul>
-
-      {/* <Paginate
-        postsPerPage={postsPerPage}
-        totalPosts={factCount}
-        paginate={paginate}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        indexOfLastPost={indexOfLastPost}
-        indexOfFirstPost={indexOfFirstPost}
-        currentPage={currentPage}
-      /> */}
     </>
   );
 }

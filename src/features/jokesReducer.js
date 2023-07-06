@@ -1,9 +1,6 @@
 import { CAT_NOT_SET } from "../conf.js";
+import { getDate } from "../helpers.js";
 const initialState = [];
-
-function fetchTime() {
-  return new Date();
-}
 
 export default function jokesReducer(state = initialState, action) {
   switch (action.type) {
@@ -15,7 +12,7 @@ export default function jokesReducer(state = initialState, action) {
           id: action.id,
           text: action.text,
           category: action.category,
-          fetchTime: fetchTime(),
+          fetchTime: getDate(),
           saved: false,
           edited: false,
           deleted: false,
@@ -54,12 +51,3 @@ export default function jokesReducer(state = initialState, action) {
       return state;
   }
 }
-
-// export function jokesGetter(state = initialState) {
-//   if (state.length > 0) {
-//     const reducer = jokesReducer();
-//     const output = reducer.map((state) => state.jokes.map((joke) => joke));
-//     console.log(output);
-//   }
-// }
-// jokesGetter();

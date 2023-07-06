@@ -10,14 +10,13 @@ import JokeListItem from "../components/jokeListItem";
 import DeletedJokes from "../components/deletedJokes";
 import Paginate from "../components/pagination";
 import CategoriesList from "../components/categoriesList";
-import { useRef } from "react";
 
 function Jokes() {
   const [category, setCategory] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState(false);
   const [categoryOutputFilter, setCategoryOutputFilter] = useState("all");
   const [showDeleted, setShowDeleted] = useState(false);
-  // let showDeleted = false;
+  const jokesObjectRedux = JokesObjectRedux();
 
   // Get categories list
   useEffect(() => {
@@ -27,7 +26,6 @@ function Jokes() {
   }, []);
 
   // PAGINATION
-  const jokesObjectRedux = JokesObjectRedux();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(3);
@@ -37,22 +35,20 @@ function Jokes() {
 
   const paginate = (pageNumber, el) => {
     setCurrentPage(pageNumber);
-    const pages = document.querySelectorAll(".active");
-    pages.forEach((page) => page.classList.remove("active"));
+    document
+      .querySelectorAll(".active")
+      .forEach((page) => page?.classList.remove("active"));
 
-    const page = document.querySelector(`${el}`);
-    page.classList.add("active");
+    document.querySelector(`${el}`)?.classList.add("active");
   };
 
-  let factCount = 0;
   function getJokesOnPage() {
-    factCount = jokesObjectRedux
+    return jokesObjectRedux
       .map((joke) =>
         showDeleted === true ? joke.deleted : joke.saved ? { ...joke } : null
       )
       .filter((result) => result !== null)
       .map((res) => {
-        // console.log(res);
         return res;
       })
       .filter((result) =>
@@ -61,8 +57,7 @@ function Jokes() {
           : result?.category === categoryOutputFilter
       ).length;
   }
-  getJokesOnPage();
-  console.log(factCount);
+  let factCount = getJokesOnPage();
 
   const previousPage = () => {
     if (currentPage !== 1) {
@@ -75,7 +70,6 @@ function Jokes() {
       paginate(currentPage + 1, `.page-number-${currentPage + 1}`);
     }
   };
-  // if (factCount === 0) setCategoryOutputFilter("all");
 
   return (
     <div className="jokes">
@@ -86,6 +80,7 @@ function Jokes() {
       <div>
         <ul className="new-joke">
           <RenderJoke
+            jokesObjectRedux={jokesObjectRedux}
             categoryFilter={categoryFilter}
             setCategoryFilter={setCategoryFilter}
           />
@@ -93,16 +88,20 @@ function Jokes() {
       </div>
       <div>
         <OutputFilter
+          jokesObjectRedux={jokesObjectRedux}
           setCategoryOutputFilter={setCategoryOutputFilter}
           categoryOutputFilter={categoryOutputFilter}
           showDeleted={showDeleted}
           setShowDeleted={setShowDeleted}
           setCategoryFilter={setCategoryFilter}
+          paginate={paginate}
+          getJokesOnPage={getJokesOnPage}
         />
       </div>
       <div>
         {showDeleted ? (
           <DeletedJokes
+            jokesObjectRedux={jokesObjectRedux}
             categoryOutputFilter={categoryOutputFilter}
             setCategoryOutputFilter={setCategoryOutputFilter}
             indexOfFirstPost={indexOfFirstPost}
@@ -111,6 +110,7 @@ function Jokes() {
           />
         ) : (
           <JokeListItem
+            jokesObjectRedux={jokesObjectRedux}
             categoryOutputFilter={categoryOutputFilter}
             setCategoryOutputFilter={setCategoryOutputFilter}
             indexOfFirstPost={indexOfFirstPost}

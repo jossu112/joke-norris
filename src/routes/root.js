@@ -1,8 +1,6 @@
 import { Outlet, Link } from "react-router-dom";
 
 function Root() {
-  const date = new Date();
-
   return (
     <>
       <div id="sidebar">

@@ -8,6 +8,10 @@ function OutputFilter({
   showDeleted,
   setShowDeleted,
   setCategoryFilter,
+  paginate,
+  factCount,
+  getJokesOnPage,
+  jokesObjectRedux,
 }) {
   const [showFilter, setShowFilter] = useState(false);
 
@@ -23,11 +27,14 @@ function OutputFilter({
       </div>
       {showFilter ? (
         <FilterContent
+          jokesObjectRedux={jokesObjectRedux}
           setCategoryOutputFilter={setCategoryOutputFilter}
           categoryOutputFilter={categoryOutputFilter}
           showDeleted={showDeleted}
           setShowDeleted={setShowDeleted}
-          setCategoryFilter={setCategoryFilter}
+          paginate={paginate}
+          factCount={factCount}
+          getJokesOnPage={getJokesOnPage}
         />
       ) : null}
     </div>
