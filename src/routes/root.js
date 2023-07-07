@@ -1,24 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import SidebarDetails from "../components/sidebar/sidebarDetails";
+import SidebarHidden from "../components/sidebar/sidebarHidden";
 
 function Root() {
   return (
     <>
-      <div id="sidebar">
-        <div>
-          {/* <img src="../img/logo.png" /> */}
-          <img src="logo.png" height="90" width="140" alt={"logo"} />
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link to={`/jokes`}>Jokes page</Link>
-            </li>
-            <li>
-              <Link to={`/about`}>About page</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <SidebarHidden />
+      <SidebarDetails />
       <div id="detail">
         <Outlet />
       </div>
